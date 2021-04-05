@@ -122,4 +122,45 @@ app.get('/api/memes/:memeID/comments', async (req, res) => {
     }
 });
 
+app.delete('/api/memes/:id', async (req, res) => {
+  try {
+    await Meme.deleteOne({
+      _id: req.params.id
+    });
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+app.delete('/api/memes/:id/comments', async (req, res) => {
+  try {
+    let meme = await Meme.findOne({_id: req.params.id});
+    if (!meme) {
+        res.send(404);
+        return;
+    }
+    await Comment.deleteMany({
+      meme: meme
+    });
+    res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
+app.put('/api/memes/:id', async (req, res) => {
+  try {
+      let meme = await Meme.findOne({_id: req.params.id});
+      meme.title = req.body.title;
+      meme.save();
+      res.sendStatus(200);
+  } catch (error) {
+    console.log(error);
+    res.sendStatus(500);
+  }
+});
+
 app.listen(3000, () => console.log('Server listening on port 3000!'));

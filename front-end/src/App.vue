@@ -14,7 +14,7 @@
   </div>
   <div class="footer">
     <router-link to="/admin">Admin</router-link>
-    <a id="gitLink" href="https://github.com/BYU-CS-260-Winter-2021/lab-4-museum-of-ordinary-objects-ElMaestro99">GitHub</a>
+    <a id="gitLink" href="https://github.com/ElMaestro99/cp4.alecbingham.com.git">GitHub</a>
   </div>
 
 </div>

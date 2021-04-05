@@ -1,13 +1,17 @@
 <template>
 <div class="home">
-  <h1>Click on a meme to see/add comments</h1>
+  <h1>Click on a meme to expand and view comments</h1>
   <div class="imgCommentContainer">
-    <section class="image-gallery">
+    <section class="image-gallery" v-if="commentsClosed">
       <div class="image" v-for="meme in memes" :key="meme.id">
         <h2>{{meme.title}}</h2>
         <img :src="meme.path" @click=selectMeme(meme) />
       </div>
     </section>
+    <div class="focus" v-else>
+      <h2>{{selectedMeme.title}}</h2>
+      <img class="focusImg" :src="selectedMeme.path">
+    </div>
     <div class="commentContainer" v-if="selectedMeme">
       <h2>Comments:</h2>
       <p></p>
@@ -19,7 +23,7 @@
         <input type="text" v-model="name" placeholder="Name">
         <button type="submit">Post comment</button>
       </form>
-      <button @click=selectMeme()>Hide comments</button>
+      <button @click=deselectMeme()>Collapse comments</button>
     </div>
   </div>
 </div>
@@ -34,6 +38,7 @@ export default {
       memes: [],
       selectedMeme: null,
       comments: [],
+      commentsClosed: true,
       text: '',
       name: '',
     }
@@ -52,6 +57,12 @@ export default {
     },
     selectMeme(meme) {
       this.selectedMeme = meme;
+      this.commentsClosed = false;
+      this.getComments();
+    },
+    deselectMeme() {
+      this.selectedMeme = null;
+      this.commentsClosed = true;
       this.getComments();
     },
     async getComments() {
@@ -81,6 +92,14 @@ export default {
 <style scoped>
 .image h2 {
   font-style: italic;
+}
+
+.focus {
+  width: 80%;
+}
+
+.focusImg {
+  width: 100%;
 }
 
 .imgCommentContainer {
