@@ -36,9 +36,15 @@ body {
 /* Header */
 .header {
   display: flex;
+  justify-content: center;
   padding: 10px 100px 0px 100px;
   background-color: #5BDEFF;
   color: #1C454F;
+}
+
+.header a {
+  color: black;
+  text-decoration: none;
 }
 
 .title {
@@ -50,7 +56,7 @@ body {
 }
 
 .content {
-  padding: 20px 100px;
+  padding: 20px 20px;
   min-height: 500px;
 }
 

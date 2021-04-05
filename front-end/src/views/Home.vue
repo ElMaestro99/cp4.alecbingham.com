@@ -1,21 +1,26 @@
 <template>
 <div class="home">
-  <div class="explanation">Click on a meme to see/add comments</div>
-  <section class="image-gallery">
-    <div class="image" v-for="meme in memes" :key="meme.id">
-      <h2>{{meme.title}}</h2>
-      <img :src="meme.path" @click=selectMeme(meme) />
+  <h1>Click on a meme to see/add comments</h1>
+  <div class="imgCommentContainer">
+    <section class="image-gallery">
+      <div class="image" v-for="meme in memes" :key="meme.id">
+        <h2>{{meme.title}}</h2>
+        <img :src="meme.path" @click=selectMeme(meme) />
+      </div>
+    </section>
+    <div class="commentContainer" v-if="selectedMeme">
+      <h2>Comments:</h2>
+      <p></p>
+      <div class="comments" v-for="comment in comments" :key="comment.id">
+        <p>{{comment.text}} <br> -<em>{{comment.name}}</em></p>
+      </div>
+      <form @submit.prevent="addComment">
+        <input class="commentHere" type="text" v-model="text" placeholder="Comment">
+        <input type="text" v-model="name" placeholder="Name">
+        <button type="submit">Post comment</button>
+      </form>
+      <button @click=selectMeme()>Hide comments</button>
     </div>
-  </section>
-  <div class="Comments" v-if="selectedMeme">
-    <div class="comments" v-for="comment in comments" :key="comment.id">
-      <p>{{comment.text}} -{{comment.name}}</p>
-    </div>
-    <form @submit.prevent="addComment">
-      <input type="text" v-model="text">
-      <input type="text" v-model="name">
-      <button type="submit">Post comment</button>
-    </form>
   </div>
 </div>
 </template>
@@ -78,6 +83,15 @@ export default {
   font-style: italic;
 }
 
+.imgCommentContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.commentHere {
+  width: 100%;
+}
+
 /* Masonry */
 *,
 *:before,
@@ -87,6 +101,7 @@ export default {
 
 .image-gallery {
   column-gap: 1.5em;
+  width: 82%;
 }
 
 .image {
@@ -99,30 +114,36 @@ export default {
   width: 100%;
 }
 
-.commentButtons {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+.commentContainer {
+  margin-left: 1.5em;
+  width: 20%;
 }
 
-/* Masonry on large screens */
-@media only screen and (min-width: 1024px) {
-  .image-gallery {
-    column-count: 4;
-  }
+.comments {
+  width: match-parent;
 }
 
 /* Masonry on medium-sized screens */
-@media only screen and (max-width: 1023px) and (min-width: 768px) {
+@media only screen and (min-width: 901px) {
   .image-gallery {
-    column-count: 3;
+    column-count: 2;
   }
 }
 
 /* Masonry on small screens */
-@media only screen and (max-width: 767px) and (min-width: 540px) {
+@media only screen and (max-width: 900px) and (min-width: 540px) {
   .image-gallery {
-    column-count: 2;
+    column-count: 1;
+  }
+
+  .commentContainer {
+    width: 30%;
+  }
+}
+
+@media only screen and (max-width: 620px) {
+  .commentContainer {
+    width: 40%;
   }
 }
 </style>
