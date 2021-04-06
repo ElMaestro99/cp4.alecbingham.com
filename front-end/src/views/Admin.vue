@@ -7,6 +7,15 @@
     <div class="form">
       <input v-model="title" placeholder="Title">
       <p></p>
+      <input type="checkbox" id="tag1" name="tag1" value="Textpost">
+      <label for="tag1">Textpost</label><br>
+      <input type="checkbox" id="tag2" name="tag2" value="NSFW">
+      <label for="tag2">Punny</label><br>
+      <input type="checkbox" id="tag3" name="tag3" value="Starwars">
+      <label for="tag3">Star Wars</label><br>
+      <input type="checkbox" id="tag4" name="tag4" value="Other">
+      <label for="tag4">Other</label><br>
+      <p></p>
       <input type="file" name="photo" @change="fileChanged">
       <p></p>
       <button @click="upload">Upload</button>
@@ -58,6 +67,10 @@ export default {
       memes: [],
       findMeme: null,
       findTitle: "",
+      tag1: false,
+      tag2: false,
+      tag3: false,
+      tag4: false,
     }
   },
   computed: {
@@ -75,14 +88,26 @@ export default {
     },
     async upload() {
       try {
+        if (document.getElementById("tag1").checked === true) {this.tag1 = true;}
+        if (document.getElementById("tag2").checked === true) {this.tag2 = true;}
+        if (document.getElementById("tag3").checked === true) {this.tag3 = true;}
+        if (document.getElementById("tag4").checked === true) {this.tag4 = true;}
         const formData = new FormData();
         formData.append('photo', this.file, this.file.name)
         let r1 = await axios.post('/api/photos', formData);
         let r2 = await axios.post('/api/memes', {
           title: this.title,
-          path: r1.data.path
+          path: r1.data.path,
+          tag1: this.tag1,
+          tag2: this.tag2,
+          tag3: this.tag3,
+          tag4: this.tag4,
         });
         this.addMeme = r2.data;
+        this.tag1 = false;
+        this.tag2 = false;
+        this.tag3 = false;
+        this.tag4 = false;
       } catch (error) {
         console.log(error);
       }

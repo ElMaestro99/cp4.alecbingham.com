@@ -38,12 +38,16 @@ body {
   display: flex;
   justify-content: center;
   padding: 10px 100px 0px 100px;
-  background-color: #5BDEFF;
-  color: #1C454F;
+  background-color: #4D85A8;
+  color: #E9fff9;
+}
+
+body {
+  background-color: #B4DEF8;
 }
 
 .header a {
-  color: black;
+  color: #850A21;
   text-decoration: none;
 }
 
@@ -66,7 +70,7 @@ body {
   justify-content: space-around;
   height: 50px;
   padding: 20px 100px 0px 100px;
-  background: #e3e3e3;
+  background-color: #4D85A8;
   font-size: 12px;
 }
 

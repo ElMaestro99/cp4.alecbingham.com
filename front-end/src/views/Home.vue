@@ -1,9 +1,15 @@
 <template>
 <div class="home">
-  <h1>Click on a meme to expand and view comments</h1>
+  <h1>Click on a meme to expand and view comments, or filter by tag:</h1>
+  <br>
+  <button @click="filter(0)">All</button>
+  <button @click="filter(1)">Textposts</button>
+  <button @click="filter(2)">Punny</button>
+  <button @click="filter(3)">Star Wars</button>
+  <button @click="filter(4)">Other</button>
   <div class="imgCommentContainer">
     <section class="image-gallery" v-if="commentsClosed">
-      <div class="image" v-for="meme in memes" :key="meme.id">
+      <div class="image" v-for="meme in filteredMemes" :key="meme.id">
         <h2>{{meme.title}}</h2>
         <img :src="meme.path" @click=selectMeme(meme) />
       </div>
@@ -36,6 +42,7 @@ export default {
   data() {
     return {
       memes: [],
+      filteredMemes: [],
       selectedMeme: null,
       comments: [],
       commentsClosed: true,
@@ -51,9 +58,17 @@ export default {
       try {
         let response = await axios.get("/api/memes");
         this.memes = response.data;
+        this.filteredMemes = this.memes;
       } catch (error) {
         console.log(error);
       }
+    },
+    filter(index) {
+      if (index === 0) {this.filteredMemes = this.memes;}
+      if (index === 1) {this.filteredMemes = this.memes.filter(meme => meme.tag1 === true);}
+      if (index === 2) {this.filteredMemes = this.memes.filter(meme => meme.tag2 === true);}
+      if (index === 3) {this.filteredMemes = this.memes.filter(meme => meme.tag3 === true);}
+      if (index === 4) {this.filteredMemes = this.memes.filter(meme => meme.tag4 === true);}
     },
     selectMeme(meme) {
       this.selectedMeme = meme;
@@ -120,7 +135,7 @@ export default {
 
 .image-gallery {
   column-gap: 1.5em;
-  width: 82%;
+  width: 100%;
 }
 
 .image {

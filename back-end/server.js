@@ -21,7 +21,11 @@ mongoose.connect('mongodb://localhost:27017/cp4', {
 // Create a scheme for memes
 const memeSchema = new mongoose.Schema({
   title: String,
-  path: String
+  path: String,
+  tag1: Boolean,
+  tag2: Boolean,
+  tag3: Boolean,
+  tag4: Boolean,
 });
 
 // Create a model for memes
@@ -53,6 +57,10 @@ app.post('/api/memes', async (req, res) => {
   const meme = new Meme({
     title: req.body.title,
     path: req.body.path,
+    tag1: req.body.tag1,
+    tag2: req.body.tag2,
+    tag3: req.body.tag3,
+    tag4: req.body.tag4,
   });
   try {
     await meme.save();
