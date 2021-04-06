@@ -9,7 +9,7 @@
       <p></p>
       <input type="checkbox" id="tag1" name="tag1" value="Textpost">
       <label for="tag1">Textpost</label><br>
-      <input type="checkbox" id="tag2" name="tag2" value="NSFW">
+      <input type="checkbox" id="tag2" name="tag2" value="Punny">
       <label for="tag2">Punny</label><br>
       <input type="checkbox" id="tag3" name="tag3" value="Starwars">
       <label for="tag3">Star Wars</label><br>
