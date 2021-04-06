@@ -32,8 +32,6 @@
     </div>
   </div>
 
-<br><br>
-
   <div class="edit">
     <div class="heading">
       <h1>Edit/Delete</h1>
@@ -48,7 +46,6 @@
       </div>
       <div class="upload" v-if="findMeme">
         <input v-model="findMeme.title">
-        <p></p>
         <img :src="findMeme.path" />
       </div>
       <div class="actions" v-if="findMeme">
@@ -178,6 +175,8 @@ export default {
 
 .admin {
   display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -202,6 +201,7 @@ export default {
 .editBody {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .circle {
@@ -224,10 +224,15 @@ button {
 }
 
 .form {
-  margin-right: 50px;
+  margin-right: 1em;
 }
 
 /* Uploaded images */
+.upload {
+  display: flex;
+  flex-direction: column;
+}
+
 .upload h2 {
   margin: 0px;
 }
