@@ -13,8 +13,14 @@
       <label for="tag2">Punny</label><br>
       <input type="checkbox" id="tag3" name="tag3" value="Starwars">
       <label for="tag3">Star Wars</label><br>
-      <input type="checkbox" id="tag4" name="tag4" value="Other">
-      <label for="tag4">Other</label><br>
+      <input type="checkbox" id="tag4" name="tag4" value="CurrentEvents">
+      <label for="tag4">Current Events</label><br>
+      <input type="checkbox" id="tag5" name="tag5" value="Classics">
+      <label for="tag5">Classics</label><br>
+      <input type="checkbox" id="tag6" name="tag6" value="Wholesome">
+      <label for="tag6">Wholesome</label><br>
+      <input type="checkbox" id="tag7" name="tag7" value="Others">
+      <label for="tag7">Other</label><br>
       <p></p>
       <input type="file" name="photo" @change="fileChanged">
       <p></p>
@@ -71,6 +77,9 @@ export default {
       tag2: false,
       tag3: false,
       tag4: false,
+      tag5: false,
+      tag6: false,
+      tag7: false,
     }
   },
   computed: {
@@ -92,6 +101,9 @@ export default {
         if (document.getElementById("tag2").checked === true) {this.tag2 = true;}
         if (document.getElementById("tag3").checked === true) {this.tag3 = true;}
         if (document.getElementById("tag4").checked === true) {this.tag4 = true;}
+        if (document.getElementById("tag5").checked === true) {this.tag5 = true;}
+        if (document.getElementById("tag6").checked === true) {this.tag6 = true;}
+        if (document.getElementById("tag7").checked === true) {this.tag7 = true;}
         const formData = new FormData();
         formData.append('photo', this.file, this.file.name)
         let r1 = await axios.post('/api/photos', formData);
@@ -102,12 +114,18 @@ export default {
           tag2: this.tag2,
           tag3: this.tag3,
           tag4: this.tag4,
+          tag5: this.tag5,
+          tag6: this.tag6,
+          tag7: this.tag7,
         });
         this.addMeme = r2.data;
         this.tag1 = false;
         this.tag2 = false;
         this.tag3 = false;
         this.tag4 = false;
+        this.tag5 = false;
+        this.tag6 = false;
+        this.tag7 = false;
       } catch (error) {
         console.log(error);
       }

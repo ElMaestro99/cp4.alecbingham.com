@@ -26,6 +26,9 @@ const memeSchema = new mongoose.Schema({
   tag2: Boolean,
   tag3: Boolean,
   tag4: Boolean,
+  tag5: Boolean,
+  tag6: Boolean,
+  tag7: Boolean,
 });
 
 // Create a model for memes
@@ -61,6 +64,9 @@ app.post('/api/memes', async (req, res) => {
     tag2: req.body.tag2,
     tag3: req.body.tag3,
     tag4: req.body.tag4,
+    tag5: req.body.tag5,
+    tag6: req.body.tag6,
+    tag7: req.body.tag7,
   });
   try {
     await meme.save();
